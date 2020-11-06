@@ -7,6 +7,8 @@ python train.py --dataroot ./datasets/sahand --load_size 256 --input_nc 1 --outp
 python test.py --dataroot ./datasets/sahand --load_size 256 --input_nc 1 --output_nc 1 --name sahand_CUTGrayscale --CUT_mode CUT --phase train
 ```
 
+dataset (shared via Slack) are to be put in `./datasets/sahand` 
+
 ### [video (1m)](https://youtu.be/Llg0vE_MVgk) |  [video (10m)](https://youtu.be/jSGOzjmN8q0) | [website](http://taesung.me/ContrastiveUnpairedTranslation/) |   [paper](https://arxiv.org/pdf/2007.15651)
 <br>
 
