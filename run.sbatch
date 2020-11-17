@@ -28,7 +28,7 @@ module load PythonAnaconda/3.7
 source .venv/bin/activate
 module load PyTorch
 
-DATA_ROOT="./datasets/sahand/sigm"
+DATA_ROOT="./datasets/sahand"
 MODEL_NAME="sigm"
 
 python train.py \
@@ -38,7 +38,7 @@ python train.py \
   --output_nc 1 \
   --name ${MODEL_NAME} \
   --CUT_mode CUT \
-  --save_epoch_freq 50
+  --save_epoch_freq 50 \
   --netD 'n_layers' \
   --n_layers_D 5
 
