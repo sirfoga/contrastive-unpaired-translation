@@ -33,22 +33,26 @@ MODEL_NAME="sigm"
 
 python train.py \
   --dataroot ${DATA_ROOT} \
-  --load_size 256 \
+  --load_size 286 \
   --input_nc 1 \
   --output_nc 1 \
   --name ${MODEL_NAME} \
   --CUT_mode CUT \
   --save_epoch_freq 50
+  --netD 'n_layers' \
+  --n_layers_D 5
 
 # meanwhile do `watch -n10 tail 6436462.out`
 
 python test.py \
   --dataroot ${DATA_ROOT} \
-  --load_size 256 \
+  --load_size 286 \
   --input_nc 1 \
   --output_nc 1 \
   --name ${MODEL_NAME} \
   --CUT_mode CUT \
-  --phase train
+  --phase train \
+  --netD 'n_layers' \
+  --n_layers_D 5
 
 exit 0
