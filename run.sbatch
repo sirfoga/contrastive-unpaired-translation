@@ -29,30 +29,29 @@ source .venv/bin/activate
 module load PyTorch
 
 DATA_ROOT="./datasets/sahand"
-MODEL_NAME="sigm"
+MODEL_NAME="pat"
+IMG_SIZE="128"
 
 python train.py \
   --dataroot ${DATA_ROOT} \
-  --load_size 286 \
+  --load_size ${IMG_SIZE} \
+  --crop_size ${IMG_SIZE} \
   --input_nc 1 \
   --output_nc 1 \
   --name ${MODEL_NAME} \
   --CUT_mode CUT \
-  --save_epoch_freq 50 \
-  --netD 'n_layers' \
-  --n_layers_D 5
+  --save_epoch_freq 50
 
 # meanwhile do `watch -n10 tail 6436462.out`
 
 python test.py \
   --dataroot ${DATA_ROOT} \
-  --load_size 286 \
+  --load_size ${IMG_SIZE} \
+  --crop_size ${IMG_SIZE} \
   --input_nc 1 \
   --output_nc 1 \
   --name ${MODEL_NAME} \
   --CUT_mode CUT \
-  --phase train \
-  --netD 'n_layers' \
-  --n_layers_D 5
+  --phase train
 
 exit 0
