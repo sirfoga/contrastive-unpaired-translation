@@ -13,15 +13,15 @@
 
 # interactive version:
 # srun \
-#   --partition=ml \
-#   --nodes=1 \
-#   --tasks=1 \
-#   --cpus-per-task=1 \
-#   --gres=gpu:1 \
-#   --mem-per-cpu=2048 \
-#   --time=01:30:00 \
-#   --account=p_ml_cv \
-#   --pty zsh
+# --partition=ml \
+# --nodes=1 \
+# --tasks=1 \
+# --cpus-per-task=1 \
+# --gres=gpu:1 \
+# --mem-per-cpu=2048 \
+# --time=02:00:00 \
+# --account=p_ml_cv \
+# --pty zsh
 
 module load modenv/ml
 module load PythonAnaconda/3.7
@@ -30,28 +30,25 @@ module load PyTorch
 
 DATA_ROOT="./datasets/sahand"
 MODEL_NAME="pat"
-IMG_SIZE="128"
+IMG_SIZE="286"
+NCE_W="2.0"
+NCE_LAY="0,4,8,12,16"
+NET_D="n_layers"
+NET_D_LAY="5"
+ARGS="--dataroot ${DATA_ROOT} \
+--load_size ${IMG_SIZE} \
+--crop_size ${IMG_SIZE} \
+--input_nc 1 \
+--output_nc 1 \
+--name ${MODEL_NAME} \
+--CUT_mode CUT \
+--lambda_NCE ${NCE_W} \
+--nce_layers ${NCE_LAY} \
+--netD ${NET_D} \
+--n_layers_D ${NET_D_LAY} \
+--save_epoch_freq 50"
 
-python train.py \
-  --dataroot ${DATA_ROOT} \
-  --load_size ${IMG_SIZE} \
-  --crop_size ${IMG_SIZE} \
-  --input_nc 1 \
-  --output_nc 1 \
-  --name ${MODEL_NAME} \
-  --CUT_mode CUT \
-  --save_epoch_freq 50
-
-# meanwhile do `watch -n10 tail 6436462.out`
-
-python test.py \
-  --dataroot ${DATA_ROOT} \
-  --load_size ${IMG_SIZE} \
-  --crop_size ${IMG_SIZE} \
-  --input_nc 1 \
-  --output_nc 1 \
-  --name ${MODEL_NAME} \
-  --CUT_mode CUT \
-  --phase train
+python train.py ${ARGS} --save_epoch_freq 50
+python test.py ${ARGS} --phase train
 
 exit 0
