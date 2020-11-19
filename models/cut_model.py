@@ -207,8 +207,12 @@ class CUTModel(BaseModel):
         feat_q_pool, _ = self.netF(feat_q, self.opt.num_patches, sample_ids)
 
         total_nce_loss = 0.0
-        for f_q, f_k, crit, nce_layer in zip(feat_q_pool, feat_k_pool, self.criterionNCE, self.nce_layers):
-            loss = crit(f_q, f_k) * self.opt.lambda_NCE
+        k = 2
+        M = 2*k / (k+1)
+        m = M / k
+        ws = np.linspace(m, M, len(self.nce_layers)).tolist()
+        for f_q, f_k, crit, nce_layer, w in zip(feat_q_pool, feat_k_pool, self.criterionNCE, self.nce_layers, ws):
+            loss = crit(f_q, f_k) * w * self.opt.lambda_NCE
             total_nce_loss += loss.mean()
 
         return total_nce_loss / n_layers
