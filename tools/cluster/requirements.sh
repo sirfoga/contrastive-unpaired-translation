@@ -1,6 +1,7 @@
 module --force purge
 module load modenv/ml
-module load Python/3.7.4
+conda deactivate
+module load Python/3.7
 source .venv/bin/activate
 module load PyTorch
 module load Pillow
