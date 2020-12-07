@@ -188,7 +188,7 @@ class CUTModel(BaseModel):
             self.loss_NCE, self.loss_NCE_bd = 0.0, 0.0
 
         if self.opt.nce_idt and self.opt.lambda_NCE > 0.0:
-            lambda_y = 1.0
+            lambda_y = 0.5
             self.loss_NCE_Y = self.calculate_NCE_loss(self.real_B, self.idt_B, lambda_y)  # l_X * L_NCE(G, X)
             loss_NCE_both = (self.loss_NCE + self.loss_NCE_Y) * 0.5  # mean
         else:
@@ -209,7 +209,7 @@ class CUTModel(BaseModel):
         feat_q_pool, _ = self.netF(feat_q, self.opt.num_patches, sample_ids)
 
         total_nce_loss = 0.0
-        k = 1.2
+        k = 1.4
         M = 2*k / (k+1.0)
         m = M / k
         ws = np.linspace(m, M, len(self.nce_layers)).tolist()
