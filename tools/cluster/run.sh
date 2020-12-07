@@ -1,9 +1,6 @@
 DATA_ROOT="./datasets/sahand"
-MODEL_NAME="cycle_gan"
+MODEL_NAME="cut"
 IMG_SIZE="286"
-NCE_W="1.0"
-NCE_LAY="0,4,8"
-NET_D="n_layers"
 
 python train.py \
   --dataroot ${DATA_ROOT} \
@@ -12,7 +9,9 @@ python train.py \
   --input_nc 1 \
   --output_nc 1 \
   --name ${MODEL_NAME} \
-  --save_epoch_freq 100
+  --save_epoch_freq 100 \
+  --lambda_GAN 1.0 \
+  --lambda_NCE 2.0
 
 python test.py \
   --dataroot ${DATA_ROOT} \
@@ -21,4 +20,6 @@ python test.py \
   --input_nc 1 \
   --output_nc 1 \
   --name ${MODEL_NAME} \
-  --phase train
+  --phase train \
+  --lambda_GAN 1.0 \
+  --lambda_NCE 2.0

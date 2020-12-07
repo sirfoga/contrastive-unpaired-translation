@@ -12,14 +12,12 @@ get-out::
 srun::
 	srun \
 	--partition=ml \
-	--nodes=1 \
-	--tasks=1 \
 	--cpus-per-task=1 \
 	--gres=gpu:1 \
-	--mem-per-cpu=2583 \
+	--mem-per-cpu=2048 \
 	--time=02:00:00 \
 	--account=p_ml_cv \
-	--pty zsh
+	--pty bash
 
 hello::
 	@echo "hello ${USER} !"
