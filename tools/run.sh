@@ -11,7 +11,9 @@ python train.py \
   --name ${MODEL_NAME} \
   --save_epoch_freq 100 \
   --lambda_GAN 1.0 \
-  --lambda_NCE 20.0
+  --lambda_NCE 10.0 \
+  --n_epochs 600 \
+  --n_epochs_decay 600
 
 python test.py \
   --dataroot ${DATA_ROOT} \
@@ -22,4 +24,4 @@ python test.py \
   --name ${MODEL_NAME} \
   --phase train \
   --lambda_GAN 1.0 \
-  --lambda_NCE 20.0
+  --lambda_NCE 10.0

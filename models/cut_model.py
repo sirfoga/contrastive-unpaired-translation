@@ -188,7 +188,7 @@ class CUTModel(BaseModel):
             self.loss_NCE, self.loss_NCE_bd = 0.0, 0.0
 
         if self.opt.nce_idt and self.opt.lambda_NCE > 0.0:
-            lambda_y = 0.5
+            lambda_y = 5.0
             self.loss_NCE_Y = self.calculate_NCE_loss(self.real_B, self.idt_B, lambda_y)  # l_X * L_NCE(G, X)
             loss_NCE_both = (self.loss_NCE + self.loss_NCE_Y) * 0.5  # mean
         else:
