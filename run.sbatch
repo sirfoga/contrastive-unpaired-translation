@@ -11,7 +11,6 @@
 
 echo "++++++++++ resources granted"
 
-cd ..  # go to root folder
 pwd
 
 source ./tools/requirements.sh
